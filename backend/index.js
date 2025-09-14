@@ -1,43 +1,70 @@
 // index.js
 import express from "express";
 import mongoose from "mongoose";
-import userRoutes from "./routes/userRoutes.js";
 import dotenv from "dotenv";
-import cors from "cors"; 
+dotenv.config();   // ✅ Load env FIRST
 
-dotenv.config();
-// import logger from "./middleware/logger.js";
+import userRoutes from "./routes/userRoutes.js"; // ✅ Now env vars exist
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import path from "path";
+import { fileURLToPath } from "url";
+import { isAuthenticated } from "./middleware/auth.js";
 
 const app = express();
 const port = 5000;
 
+// For __dirname (since ES Modules don’t have it)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 app.use(cors({
-  origin: "*", // change to "http://localhost:3000" or your frontend URL for more security
+  origin: "http://localhost:3000", // change to your frontend URL
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
-
-// Middleware
 app.use(express.json());
-// app.use(logger); // custom middleware
+app.use(cookieParser());
 
-// MongoDB Connection
 try {
-  await mongoose.connect(process.env.MONGODB_URL, {
-    // useNewUrlParser: true,
-    // useUnifiedTopology: true,
-  });
+  await mongoose.connect(process.env.MONGODB_URL);
   console.log("✅ MongoDB Connected");
 } catch (err) {
   console.error("❌ MongoDB Connection Error:", err);
 }
 
-// Routes
+// ✅ Routes
 app.use("/users", userRoutes);
 
-// Root Route
+// Serve static files
+// Serve only assets, not HTML
+app.use("/assets", express.static(path.join(__dirname, "frontend/assets")));
+
+// Protected route
+app.get("/iindex.html", isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "iindex.html"));
+});
+
+// Public routes
+app.get("/login.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "login.html"));
+});
+
+app.get("/signup.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "signup.html"));
+});
+
+app.get("/index.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "index.html"));
+});
+
+app.get("/InterviewPrep/technical-interview.html", isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "InterviewPrep/technical-interview.html"));
+});
+
+// Root
 app.get("/", (req, res) => {
-  res.send("🚀 Express + Mongoose Project Running");
+  res.sendFile(path.join(__dirname, "frontend", "index.html"));
 });
 
 // Start Server
