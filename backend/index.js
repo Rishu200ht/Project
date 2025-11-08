@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();   // ✅ Load env FIRST
 
 import userRoutes from "./routes/userRoutes.js"; // ✅ Now env vars exist
+import experienceRoutes from "./routes/experienceRoutes.js"; // ✅ Now env vars exist
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from "path";
@@ -19,7 +20,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(cors({
-  origin: "http://localhost:3000", // change to your frontend URL
+  origin: "http://localhost:5000", // change to your frontend URL
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
@@ -35,6 +36,7 @@ try {
 
 // ✅ Routes
 app.use("/users", userRoutes);
+app.use("/experience", experienceRoutes);
 
 // Serve static files
 // Serve only assets, not HTML
@@ -60,6 +62,9 @@ app.get("/index.html", (req, res) => {
 
 app.get("/InterviewPrep/technical-interview.html", isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "InterviewPrep/technical-interview.html"));
+});
+app.get("/InterviewPrep/experience.html", isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "InterviewPrep/experience.html"));
 });
 
 // Root

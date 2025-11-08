@@ -1,7 +1,9 @@
 function showInterviewPage() {
   window.location.href = "./InterviewPrep/technical-interview.html";
 }
-
+function showExperiencePage(){
+  window.location.href = "./InterviewPrep/experience.html";
+}
 
 
 

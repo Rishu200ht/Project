@@ -1385,6 +1385,99 @@ body {
 
 
 
+/* === FORM SECTION === */
+.form-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  background: #f9f9f9;
+}
+
+.form-card {
+  width: 100%;
+  max-width: 600px;   /* form won’t stretch too much */
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+/* Header */
+.form-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.form-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.form-header p {
+  font-size: 16px;
+  color: #666;
+}
+
+/* Inputs */
+.form-card form input[type="text"],
+.form-card form input[type="url"],
+.form-card form input[type="file"] {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+}
+
+.form-card form input[type="text"]:focus,
+.form-card form input[type="url"]:focus,
+.form-card form input[type="file"]:focus {
+  border-color: #ff9800;
+  box-shadow: 0 0 6px rgba(255,152,0,0.3);
+}
+
+/* Label */
+.form-card label {
+  font-weight: 600;
+  display: block;
+  margin: 15px 0 8px;
+  text-align: left;
+}
+
+/* Button */
+#submitBtn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 20px;
+  background: #ff9800;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#submitBtn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+#submitBtn:hover:not(:disabled) {
+  background: #e68900;
+}
+
+/* Message */
+#message {
+  margin-top: 15px;
+  font-size: 15px;
+}
 
 
 

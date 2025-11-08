@@ -29,7 +29,7 @@
           <i class="fas fa-home nav-icon"></i>
           <span class="nav-text">Home</span>
         </button>
-        <button class="nav-btn" onclick="scrollToSection('experiences')">
+        <button class="nav-btn" onclick="showExperiencePage()">
           <i class="fas fa-play-circle nav-icon"></i>
           <span class="nav-text">View Experience</span>
         </button>
@@ -266,7 +266,7 @@
       const data = Object.fromEntries(formData.entries());
 
       try {
-        const response = await fetch("http://localhost:3000/submit-form", {
+        const response = await fetch("http://localhost:5000/experience/submit-form", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
