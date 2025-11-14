@@ -41,6 +41,7 @@ app.use("/experience", experienceRoutes);
 // Serve static files
 // Serve only assets, not HTML
 app.use("/assets", express.static(path.join(__dirname, "frontend/assets")));
+app.use("/Knowledge-check/js", express.static(path.join(__dirname, "frontend/Knowledge-check/js")));
 
 // Protected route
 app.get("/iindex.html", isAuthenticated, (req, res) => {
@@ -65,6 +66,14 @@ app.get("/InterviewPrep/technical-interview.html", isAuthenticated, (req, res) =
 });
 app.get("/InterviewPrep/experience.html", isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "InterviewPrep/experience.html"));
+});
+
+app.get("/Knowledge-check/knowledge.html", isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "Knowledge-check/knowledge.html"));
+});
+
+app.get("/Knowledge-check/quiz.html", isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "Knowledge-check/quiz.html"));
 });
 
 // Root
